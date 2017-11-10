@@ -1,7 +1,11 @@
+
 CC = gcc
 
-CFLAGS = -Wall -Wfloat-equal -Wpointer-arith -Wstrict-prototypes -Wwrite-strings
-GTK = `pkg-config --libs --cflags gtk+-3.0`
+CFLAGS = -Wall -ftrapv -Wfloat-equal -Wstrict-prototypes -Wwrite-strings
+
+TARGET = termdis
+
+NCURSES = -lncurses
 
 all:
-	$(CC) -o program *.c $(CFLAGS) $(GTK)
+	$(CC) $(CFLAGS) -pthread main.c pages/*.c -o $(TARGET) $(NCURSES)
