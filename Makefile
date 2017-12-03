@@ -1,11 +1,11 @@
 
 CC = gcc
 
-CFLAGS = -Wall -ftrapv -Wfloat-equal -Wstrict-prototypes -Wwrite-strings
+CFLAGS = -Wall -ftrapv -Wfloat-equal -Wstrict-prototypes
 
 TARGET = termdis
 
-NCURSES = -lncurses
+LIBS = -lncurses
 
 all:
-	$(CC) $(CFLAGS) -pthread main.c pages/*.c -o $(TARGET) $(NCURSES)
+	$(CC) $(CFLAGS) -pthread *.c -o $(TARGET) $(LIBS)
