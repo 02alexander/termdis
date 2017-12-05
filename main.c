@@ -11,9 +11,9 @@ int openPort(const char *name);
 
 int main(int argc, char const *argv[])
 {
-	atexit( (void(*)(void))endwin);
+	char *fname = NULL;
 
-	const char *fname = "/dev/ttyACM0";
+	atexit( (void(*)(void))endwin);
 
 	initscr();
 	cbreak();
