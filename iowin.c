@@ -24,16 +24,23 @@ int ioPage(int fd)
 		addErrMsg("error creating outputWin");
 		return -1;
 	}
-	if ((inputWin = newwin(LINES - 3 - 3, COLS, 3 + 3, 0)) == NULL) {
+	if ((inputWin = newwin(LINES - 3 - 3 - 3, COLS, 3 + 3, 0)) == NULL) {
 		addErrMsg("error creating inputWin");
 		return -1;
 	}
+
+	mvprintw(LINES - 1, 0, "press F2 to exit");
+	refresh();
 
 	keypad(outputWin, TRUE);
 	wborder(outputWin, ' ', ' ', ACS_HLINE, ACS_HLINE, ACS_HLINE, ACS_HLINE, ACS_HLINE, ACS_HLINE);
 	wrefresh(outputWin);
 
 	arg = malloc(sizeof(int) + sizeof(WINDOW*));
+	if (arg == NULL) {
+		addErrMsg("ioPage malloc error");
+		return -3;
+	}
 	*(int*)arg = fd;
 	*(WINDOW**)(arg + sizeof(int)) = inputWin;
 	scrollok(inputWin, TRUE);
@@ -207,15 +214,3 @@ char *outputParseLine(char *line, int *len)
 
 	return newLine;
 }
-
-
-
-
-
-
-
-
-
-
-
-
